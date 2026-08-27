@@ -1,0 +1,25 @@
+{
+  "name": "@devfoundry/cli",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "bin": {
+    "foundry": "./bin/foundry.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "doctor": "node ./bin/foundry.js doctor"
+  },
+  "dependencies": {
+    "@devfoundry/core": "workspace:*",
+    "@devfoundry/reporter": "workspace:*",
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.2",
+    "vitest": "^1.6.0"
+  }
+}

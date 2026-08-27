@@ -1,0 +1,22 @@
+{
+  "name": "devfoundry-monorepo",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.5.0",
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,js,json,md,yml,yaml}\"",
+    "doctor": "pnpm --filter @devfoundry/cli run doctor"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.12",
+    "typescript": "^5.5.2",
+    "prettier": "^3.3.2",
+    "eslint": "^9.5.0",
+    "typescript-eslint": "^7.14.1",
+    "@eslint/js": "^9.5.0",
+    "vitest": "^1.6.0"
+  }
+}
