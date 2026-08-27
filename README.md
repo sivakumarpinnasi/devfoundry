@@ -51,7 +51,7 @@ DevFoundry will progressively provide:
 The first release is intentionally small.
 
 ```bash
-npx foundry doctor
+npx @vrtex/foundry scan
 ```
 
 ## Dependency Vulnerability Scanning
@@ -60,10 +60,11 @@ DevFoundry scans your project's dependencies against [OSV.dev](https://osv.dev) 
 Open Source Vulnerabilities database — with no API key required.
 
 ```bash
-foundry doctor                # Full scan (project + secrets + OSV advisories)
-foundry doctor --offline      # Skip network advisory check (air-gapped / fast CI)
-foundry doctor --dependencies # Dependency inventory + OSV advisories only
-foundry doctor --json         # Machine-readable output (includes advisoryInfo)
+npx @vrtex/foundry doctor                # Fast summary diagnostic scan
+npx @vrtex/foundry scan                  # Full scan (project + secrets + OSV advisories)
+npx @vrtex/foundry scan --offline        # Skip network advisory check (air-gapped / fast CI)
+npx @vrtex/foundry scan --dependencies   # Dependency inventory + OSV advisories only
+npx @vrtex/foundry scan --json           # Machine-readable output (includes advisoryInfo)
 ```
 
 Advisory status in the report distinguishes between:
@@ -82,10 +83,10 @@ See [docs/dependencies.md](docs/dependencies.md) for full documentation.
 DevFoundry enables you to snapshot your codebase health using baselines, and verify changes to ensure no regressions are introduced.
 
 ```bash
-foundry baseline create  # Run scan and save codebase health baseline
-foundry baseline show    # Display details of the saved baseline
-foundry verify           # Compare current codebase status against the baseline
-foundry baseline clear   # Remove the saved baseline
+npx @vrtex/foundry baseline create  # Run scan and save codebase health baseline
+npx @vrtex/foundry baseline show    # Display details of the saved baseline
+npx @vrtex/foundry verify           # Compare current codebase status against the baseline
+npx @vrtex/foundry baseline clear   # Remove the saved baseline
 ```
 
 **Privacy & Security**: Baseline files (`.devfoundry/baseline.json`) contain only non-sensitive metadata (fingerprints, rules, files). Raw values and secrets are **never** stored.
@@ -97,9 +98,9 @@ See [docs/baseline.md](docs/baseline.md) for full documentation.
 DevFoundry includes a baseline-aware **CI Policy Engine** to enforce security and dependency rules on CI runners:
 
 ```bash
-foundry ci           # Run analysis, compare against baseline, and evaluate CI policies
-foundry ci --strict  # Include test/fixture folders in CI checks
-foundry ci --json    # Machine-readable policy evaluation result (exits 1 on failure)
+npx @vrtex/foundry ci           # Run analysis, compare against baseline, and evaluate CI policies
+npx @vrtex/foundry ci --strict  # Include test/fixture folders in CI checks
+npx @vrtex/foundry ci --json    # Machine-readable policy evaluation result (exits 1 on failure)
 ```
 
 - **Regression blocking**: Whitelists existing baseline issues; fails builds only on *newly introduced* findings.
