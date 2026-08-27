@@ -67,8 +67,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build CLI
-        run: pnpm --filter @devfoundry/foundry build
+      - name: Build workspace
+        run: pnpm build
 
       - name: Pack tarball
         id: pack
