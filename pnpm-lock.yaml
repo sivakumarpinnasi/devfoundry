@@ -44,12 +44,24 @@ importers:
       '@devfoundry/detector':
         specifier: workspace:*
         version: link:../../packages/detector
+      '@devfoundry/integrations-github':
+        specifier: workspace:*
+        version: link:../../packages/integrations/github
+      '@devfoundry/policy':
+        specifier: workspace:*
+        version: link:../../packages/policy
+      '@devfoundry/remediation':
+        specifier: workspace:*
+        version: link:../../packages/remediation
       '@devfoundry/reporter':
         specifier: workspace:*
         version: link:../../packages/reporter
       '@devfoundry/security':
         specifier: workspace:*
         version: link:../../packages/security
+      '@devfoundry/verification':
+        specifier: workspace:*
+        version: link:../../packages/verification
       commander:
         specifier: ^12.1.0
         version: 12.1.0
@@ -96,7 +108,42 @@ importers:
         specifier: ^1.6.0
         version: 1.6.1(@types/node@20.19.43)
 
-  packages/reporter:
+  packages/integrations/github:
+    dependencies:
+      '@devfoundry/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@devfoundry/policy':
+        specifier: workspace:*
+        version: link:../../policy
+      '@devfoundry/verification':
+        specifier: workspace:*
+        version: link:../../verification
+    devDependencies:
+      typescript:
+        specifier: ^5.5.2
+        version: 5.9.3
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.1(@types/node@20.19.43)
+
+  packages/policy:
+    dependencies:
+      '@devfoundry/core':
+        specifier: workspace:*
+        version: link:../core
+      '@devfoundry/verification':
+        specifier: workspace:*
+        version: link:../verification
+    devDependencies:
+      typescript:
+        specifier: ^5.5.2
+        version: 5.9.3
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.1(@types/node@20.19.43)
+
+  packages/remediation:
     dependencies:
       '@devfoundry/core':
         specifier: workspace:*
@@ -109,7 +156,42 @@ importers:
         specifier: ^1.6.0
         version: 1.6.1(@types/node@20.19.43)
 
+  packages/reporter:
+    dependencies:
+      '@devfoundry/core':
+        specifier: workspace:*
+        version: link:../core
+      '@devfoundry/policy':
+        specifier: workspace:*
+        version: link:../policy
+      '@devfoundry/remediation':
+        specifier: workspace:*
+        version: link:../remediation
+      '@devfoundry/verification':
+        specifier: workspace:*
+        version: link:../verification
+    devDependencies:
+      typescript:
+        specifier: ^5.5.2
+        version: 5.9.3
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.1(@types/node@20.19.43)
+
   packages/security:
+    dependencies:
+      '@devfoundry/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      typescript:
+        specifier: ^5.5.2
+        version: 5.9.3
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.1(@types/node@20.19.43)
+
+  packages/verification:
     dependencies:
       '@devfoundry/core':
         specifier: workspace:*

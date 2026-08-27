@@ -52,3 +52,67 @@ The first release is intentionally small.
 
 ```bash
 npx foundry doctor
+```
+
+## Dependency Vulnerability Scanning
+
+DevFoundry scans your project's dependencies against [OSV.dev](https://osv.dev) — the
+Open Source Vulnerabilities database — with no API key required.
+
+```bash
+foundry doctor                # Full scan (project + secrets + OSV advisories)
+foundry doctor --offline      # Skip network advisory check (air-gapped / fast CI)
+foundry doctor --dependencies # Dependency inventory + OSV advisories only
+foundry doctor --json         # Machine-readable output (includes advisoryInfo)
+```
+
+Advisory status in the report distinguishes between:
+
+- **`✓ Checked`** — OSV responded successfully; findings are accurate.
+- **`✗ Unavailable`** — OSV was unreachable; vulnerability status is unknown (not zero).
+- **`— Not checked`** — Advisory lookup skipped via `--offline`; not zero.
+
+**Privacy**: Only package name, version, and ecosystem are sent to OSV. Source files, secrets,
+and environment variables are never transmitted.
+
+See [docs/dependencies.md](docs/dependencies.md) for full documentation.
+
+## Codebase Baselines and Verification
+
+DevFoundry enables you to snapshot your codebase health using baselines, and verify changes to ensure no regressions are introduced.
+
+```bash
+foundry baseline create  # Run scan and save codebase health baseline
+foundry baseline show    # Display details of the saved baseline
+foundry verify           # Compare current codebase status against the baseline
+foundry baseline clear   # Remove the saved baseline
+```
+
+**Privacy & Security**: Baseline files (`.devfoundry/baseline.json`) contain only non-sensitive metadata (fingerprints, rules, files). Raw values and secrets are **never** stored.
+
+See [docs/baseline.md](docs/baseline.md) for full documentation.
+
+## CI/CD Policy Engine & GitHub Actions
+
+DevFoundry includes a baseline-aware **CI Policy Engine** to enforce security and dependency rules on CI runners:
+
+```bash
+foundry ci           # Run analysis, compare against baseline, and evaluate CI policies
+foundry ci --strict  # Include test/fixture folders in CI checks
+foundry ci --json    # Machine-readable policy evaluation result (exits 1 on failure)
+```
+
+- **Regression blocking**: Whitelists existing baseline issues; fails builds only on *newly introduced* findings.
+- **Privacy & Security**: Operates completely local to the runner. DevFoundry **never** uploads repository contents.
+
+See [docs/ci.md](docs/ci.md) for full documentation.
+
+## Development Repository Status
+
+The DevFoundry repository intentionally contains test fixtures that exercise
+secret and security detection.
+
+These fixtures are excluded from normal scanning and are used by strict-mode
+tests. Running `foundry scan --strict` against the repository may therefore
+produce findings by design.
+

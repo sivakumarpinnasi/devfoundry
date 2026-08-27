@@ -1,0 +1,26 @@
+name: 'DevFoundry CI Action'
+description: 'Deterministic security and dependency policy evaluation for DevFoundry'
+author: 'DevFoundry Team'
+inputs:
+  strict:
+    description: 'Scan all files including test and fixture folders'
+    required: false
+    default: 'false'
+  offline:
+    description: 'Skip network advisory checks when analyzing dependencies'
+    required: false
+    default: 'false'
+runs:
+  using: 'composite'
+  steps:
+    - name: Run Policy Evaluation
+      shell: bash
+      run: |
+        EXTRA_FLAGS=""
+        if [ "${{ inputs.strict }}" = "true" ]; then
+          EXTRA_FLAGS="$EXTRA_FLAGS --strict"
+        fi
+        if [ "${{ inputs.offline }}" = "true" ]; then
+          EXTRA_FLAGS="$EXTRA_FLAGS --offline"
+        fi
+        node ${{ github.action_path }}/apps/cli/bin/foundry.js ci $EXTRA_FLAGS

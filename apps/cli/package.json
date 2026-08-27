@@ -19,6 +19,10 @@
     "@devfoundry/security": "workspace:*",
     "@devfoundry/dependencies": "workspace:*",
     "@devfoundry/reporter": "workspace:*",
+    "@devfoundry/remediation": "workspace:*",
+    "@devfoundry/verification": "workspace:*",
+    "@devfoundry/policy": "workspace:*",
+    "@devfoundry/integrations-github": "workspace:*",
     "commander": "^12.1.0"
   },
   "devDependencies": {

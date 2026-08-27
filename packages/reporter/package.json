@@ -10,7 +10,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@devfoundry/core": "workspace:*"
+    "@devfoundry/core": "workspace:*",
+    "@devfoundry/remediation": "workspace:*",
+    "@devfoundry/verification": "workspace:*",
+    "@devfoundry/policy": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.5.2",

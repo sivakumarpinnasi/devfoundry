@@ -16,3 +16,6 @@ packages:
   /typescript@5.0.4:
     resolution: {integrity: sha512-cWyzdWn1nygGvyFDyRSmclO684OcLYAFa7Rf7UX786MbVJ4qJc2JQCGE1w19up0Jg5e1A1CNt56++Ew++PksQ==}
     dev: true
+  /inherits@2.0.4:
+    resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqew==}
+    dev: false
