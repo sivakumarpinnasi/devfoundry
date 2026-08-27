@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "createdAt": "2026-08-27T10:29:36.973Z",
+  "toolVersion": "0.2.0",
+  "project": {
+    "type": "Node.js / TypeScript",
+    "packageManager": "pnpm"
+  },
+  "findings": [
+    {
+      "fingerprint": "dnVsbi1HSFNBLTY3bWgtNHd2OC0yZjk5OnBhY2thZ2UuanNvbjplc2J1aWxkOjAuMjEuNQ==",
+      "ruleId": "vuln-GHSA-67mh-4wv8-2f99",
+      "category": "dependencies",
+      "severity": "medium",
+      "file": "package.json"
+    },
+    {
+      "fingerprint": "dnVsbi1HSFNBLTV4cnEtODYyNi00cndwOnBhY2thZ2UuanNvbjp2aXRlc3Q6MS42LjE=",
+      "ruleId": "vuln-GHSA-5xrq-8626-4rwp",
+      "category": "dependencies",
+      "severity": "medium",
+      "file": "package.json"
+    },
+    {
+      "fingerprint": "dnVsbi1HSFNBLTR3N3ctNjZ3Mi01dmY5OmxvY2tmaWxlOnZpdGU6NS40LjIx",
+      "ruleId": "vuln-GHSA-4w7w-66w2-5vf9",
+      "category": "dependencies",
+      "severity": "medium",
+      "file": "lockfile"
+    },
+    {
+      "fingerprint": "dnVsbi1HSFNBLWZ4MmgtcGY2ai14Y2ZmOmxvY2tmaWxlOnZpdGU6NS40LjIx",
+      "ruleId": "vuln-GHSA-fx2h-pf6j-xcff",
+      "category": "dependencies",
+      "severity": "medium",
+      "file": "lockfile"
+    },
+    {
+      "fingerprint": "dnVsbi1HSFNBLXY2d2gtOTZnOS02d3gzOmxvY2tmaWxlOnZpdGU6NS40LjIx",
+      "ruleId": "vuln-GHSA-v6wh-96g9-6wx3",
+      "category": "dependencies",
+      "severity": "medium",
+      "file": "lockfile"
+    }
+  ],
+  "advisories": {
+    "provider": "osv",
+    "status": "ok"
+  }
+}

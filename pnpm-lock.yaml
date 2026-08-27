@@ -35,6 +35,10 @@ importers:
 
   apps/cli:
     dependencies:
+      commander:
+        specifier: ^12.1.0
+        version: 12.1.0
+    devDependencies:
       '@devfoundry/core':
         specifier: workspace:*
         version: link:../../packages/core
@@ -62,10 +66,6 @@ importers:
       '@devfoundry/verification':
         specifier: workspace:*
         version: link:../../packages/verification
-      commander:
-        specifier: ^12.1.0
-        version: 12.1.0
-    devDependencies:
       esbuild:
         specifier: ^0.21.5
         version: 0.21.5
