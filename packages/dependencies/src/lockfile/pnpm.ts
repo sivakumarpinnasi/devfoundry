@@ -156,7 +156,7 @@ export function parsePnpmLockfile(lockfilePath: string): PnpmLockfileResult {
 
   let content: string;
   try {
-    content = fs.readFileSync(lockfilePath, 'utf8');
+    content = fs.readFileSync(lockfilePath, 'utf8').replace(/\r\n/g, '\n');
   } catch {
     return empty;
   }

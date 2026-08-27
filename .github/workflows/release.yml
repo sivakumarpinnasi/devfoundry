@@ -1,0 +1,101 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write   # create GitHub Release
+  id-token: write   # OIDC token for npm provenance
+
+jobs:
+  # -- 1. Full CI gate --------------------------------------------------------
+  ci:
+    name: Build, Test & Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build workspace
+        run: pnpm build
+
+      - name: Run unit tests
+        run: pnpm test
+
+      - name: Run linting
+        run: pnpm lint
+
+  # -- 2. Pack, smoke-test, publish -------------------------------------------
+  publish:
+    name: Publish to npm
+    needs: ci
+    runs-on: ubuntu-latest
+    environment: npm-publish   # optional: add manual approval gate in GitHub
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (with npm registry auth)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build CLI
+        run: pnpm --filter @devfoundry/foundry build
+
+      - name: Pack tarball
+        id: pack
+        working-directory: apps/cli
+        run: |
+          TARBALL=$(npm pack 2>/dev/null | tail -1)
+          echo "tarball=$TARBALL" >> "$GITHUB_OUTPUT"
+          echo "Packed: $TARBALL"
+
+      - name: Smoke-test packed tarball
+        working-directory: apps/cli
+        run: |
+          TARBALL="${{ steps.pack.outputs.tarball }}"
+          TMPDIR=$(mktemp -d)
+          cd "$TMPDIR"
+          npm install --prefix . "$OLDPWD/$TARBALL" 2>/dev/null
+          node node_modules/.bin/foundry --help
+          echo "Smoke test passed"
+
+      - name: Publish to npm (with provenance)
+        working-directory: apps/cli
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: apps/cli/${{ steps.pack.outputs.tarball }}

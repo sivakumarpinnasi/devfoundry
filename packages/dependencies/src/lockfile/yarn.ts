@@ -48,7 +48,7 @@ export function parseYarnLockfile(lockfilePath: string): YarnLockfileResult {
 
   let content: string;
   try {
-    content = fs.readFileSync(lockfilePath, 'utf8');
+    content = fs.readFileSync(lockfilePath, 'utf8').replace(/\r\n/g, '\n');
   } catch {
     return empty;
   }

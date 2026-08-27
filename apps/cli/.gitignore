@@ -1,0 +1,6 @@
+# Build artifacts
+/*.tgz
+/README.md
+
+# TypeScript build info
+/*.tsbuildinfo

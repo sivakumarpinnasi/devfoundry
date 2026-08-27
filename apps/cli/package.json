@@ -1,19 +1,40 @@
 {
-  "name": "@devfoundry/cli",
-  "version": "0.1.0",
+  "name": "@devfoundry/foundry",
+  "version": "0.2.0",
+  "description": "Open-source developer platform for understanding, securing, maintaining, testing, and shipping software.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sivakumarpinnasi/devfoundry.git"
+  },
+  "homepage": "https://github.com/sivakumarpinnasi/devfoundry#readme",
+  "bugs": {
+    "url": "https://github.com/sivakumarpinnasi/devfoundry/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "module",
   "bin": {
     "foundry": "./bin/foundry.js"
   },
+  "files": [
+    "bin",
+    "dist",
+    "README.md"
+  ],
   "scripts": {
-    "build": "tsc",
+    "build": "node -e \"require('fs').copyFileSync('../../README.md','README.md')\" && esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js --external:commander --external:fsevents",
     "test": "vitest run",
     "lint": "eslint .",
     "doctor": "node ./bin/foundry.js doctor"
   },
   "dependencies": {
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
     "@devfoundry/core": "workspace:*",
     "@devfoundry/detector": "workspace:*",
     "@devfoundry/security": "workspace:*",
@@ -23,9 +44,7 @@
     "@devfoundry/verification": "workspace:*",
     "@devfoundry/policy": "workspace:*",
     "@devfoundry/integrations-github": "workspace:*",
-    "commander": "^12.1.0"
-  },
-  "devDependencies": {
+    "esbuild": "^0.21.5",
     "typescript": "^5.5.2",
     "vitest": "^1.6.0"
   }
