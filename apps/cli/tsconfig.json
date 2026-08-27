@@ -16,6 +16,9 @@
   "include": ["src/**/*"],
   "references": [
     { "path": "../../packages/core" },
+    { "path": "../../packages/detector" },
+    { "path": "../../packages/security" },
+    { "path": "../../packages/dependencies" },
     { "path": "../../packages/reporter" }
   ]
 }

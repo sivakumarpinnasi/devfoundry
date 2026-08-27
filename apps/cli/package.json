@@ -15,6 +15,9 @@
   },
   "dependencies": {
     "@devfoundry/core": "workspace:*",
+    "@devfoundry/detector": "workspace:*",
+    "@devfoundry/security": "workspace:*",
+    "@devfoundry/dependencies": "workspace:*",
     "@devfoundry/reporter": "workspace:*",
     "commander": "^12.1.0"
   },
